@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-header">
+    {{k}}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><input type="text" class="form-control" autofocus name="text" hx-post="{% url 'bemerkung' k.pk %}" hx-target="#content-container"></li>
+    {% for b in bemerkungen %}
+    <li class="list-group-item">{{b}}</li>
+    {% endfor %}
+  </ul>
+</div>
+<script>
+  let CSRF_TOKEN = '{{ csrf_token }}';
+document.body.addEventListener('htmx:configRequest', (event) => {
+    event.detail.headers['X-CSRFToken'] = CSRF_TOKEN;
+})
+
+</script>
